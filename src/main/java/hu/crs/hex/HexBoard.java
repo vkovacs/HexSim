@@ -56,7 +56,7 @@ public class HexBoard<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return !(i == rowCount && j == maxColIndexInRow(i));
+            return !(i == rowCount - 1 && j == maxColIndexInRow(i));
         }
 
         @Override
