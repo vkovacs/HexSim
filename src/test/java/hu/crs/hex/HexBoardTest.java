@@ -10,7 +10,7 @@ class HexBoardTest {
     @Test
     void fillBoardWithEmpty() {
         //given
-        var hexBoard = new HexBoard<Hex>(1, 2);
+        var hexBoard = new HexBoard<Hex>(10, 15);
 
         //when
         hexBoard.fill(Hex.EMPTY);
