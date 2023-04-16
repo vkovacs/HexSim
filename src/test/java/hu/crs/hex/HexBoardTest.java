@@ -1,9 +1,9 @@
 package hu.crs.hex;
 
 
-import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class HexBoardTest {
@@ -16,6 +16,10 @@ class HexBoardTest {
         hexBoard.fill(Hex.EMPTY);
 
         //then
-        hexBoard.forEach( hex -> assertThat(hex, CoreMatchers.is(Hex.EMPTY)));
+        assertThat(hexBoard.stream()
+                .filter(e -> e == Hex.EMPTY)
+                .count(), is(5L));
+
+        hexBoard.forEach(hex -> assertThat(hex, is(Hex.EMPTY)));
     }
 }

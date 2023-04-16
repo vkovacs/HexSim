@@ -5,6 +5,8 @@ import lombok.Value;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Value
 public class HexBoard<T> implements Iterable<T> {
@@ -45,6 +47,10 @@ public class HexBoard<T> implements Iterable<T> {
         return maxColInRow(row) - 1;
     }
 
+    public Stream<T> stream() {
+        return StreamSupport.stream(this.spliterator(), false);
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new HexBoardIterator();
@@ -56,7 +62,7 @@ public class HexBoard<T> implements Iterable<T> {
 
         @Override
         public boolean hasNext() {
-            return !(i == rowCount - 1 && j == maxColIndexInRow(i));
+            return i < rowCount;
         }
 
         @Override
