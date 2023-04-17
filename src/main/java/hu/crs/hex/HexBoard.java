@@ -31,9 +31,9 @@ public class HexBoard<T> implements Iterable<T> {
         }
     }
 
-    public T get(int x, int y) {
-        if (x >= rowCount || y >= colCount) throw new IllegalArgumentException("Indexed out of HexBoard");
-        if (x % 2 == 0 && y == colCount - 1) throw new IllegalArgumentException("Indexed out of HexBoard, that row does not contain that Hex");
+    T get(int x, int y) {
+        if (x < 0 || y < 0 || x >= rowCount || y >= colCount) throw new IndexOutOfBoundsException("Indexed out of HexBoard");
+        if (x % 2 == 0 && y == colCount - 1) throw new IndexOutOfBoundsException("Indexed out of HexBoard, that row does not contain that Hex");
 
         return board.get(x).get(y);
     }
