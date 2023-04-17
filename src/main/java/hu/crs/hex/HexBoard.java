@@ -14,21 +14,10 @@ public class HexBoard<T> implements Iterable<T> {
     int colCount;
     List<List<T>> board = new ArrayList<>();
 
-    public HexBoard(int rowCount, int colCount) {
+    public HexBoard(int rowCount, int colCount, T hex) {
         this.rowCount = rowCount;
         this.colCount = colCount;
-    }
-
-    public void fill(T hex) {
-        for (int i = 0; i < rowCount; i++) {
-            List<T> row = new ArrayList<>();
-            int maxJ = maxColInRow(i);
-
-            for (int j = 0; j < maxJ; j++) {
-                row.add(hex);
-            }
-            board.add(row);
-        }
+        fill(hex);
     }
 
     T get(int x, int y) {
@@ -56,7 +45,20 @@ public class HexBoard<T> implements Iterable<T> {
         return new HexBoardIterator();
     }
 
+    private void fill(T hex) {
+        for (int i = 0; i < rowCount; i++) {
+            List<T> row = new ArrayList<>();
+            int maxJ = maxColInRow(i);
+
+            for (int j = 0; j < maxJ; j++) {
+                row.add(hex);
+            }
+            board.add(row);
+        }
+    }
+
     private class HexBoardIterator implements Iterator<T> {
+
         int i = 0;
         int j = 0;
 
