@@ -15,6 +15,7 @@ public class HexBoard<T> implements Iterable<T> {
     List<List<T>> board = new ArrayList<>();
 
     public HexBoard(int rowCount, int colCount, T hex) {
+        if (rowCount < 1 || colCount < 1) throw new IllegalArgumentException("RowCount and ColCount must be larger than 0!");
         this.rowCount = rowCount;
         this.colCount = colCount;
         fill(hex);
@@ -55,6 +56,12 @@ public class HexBoard<T> implements Iterable<T> {
             }
             board.add(row);
         }
+    }
+
+    public int getSize() {
+        int shortRowsCount = rowCount / 2;
+        int longRowsCount = rowCount - shortRowsCount;
+        return longRowsCount * colCount + shortRowsCount * (colCount - 1);
     }
 
     private class HexBoardIterator implements Iterator<T> {

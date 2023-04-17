@@ -31,6 +31,15 @@ class HexBoardTest {
 
         //when - then
         assertThrows(IndexOutOfBoundsException.class, () -> hexBoard.get(x, y), "Indexed out of HexBoard");
+    }
 
+    @ParameterizedTest
+    @CsvSource(value = {"1,1,1","3,4,11","4,4,14"})
+    void calculateSize(int rowCount, int colCount, int expectedSize) {
+        //given
+        var hexBoard = new HexBoard<>(rowCount, colCount, Hex.EMPTY);
+
+        //when - then
+        assertThat(hexBoard.getSize(), is(expectedSize));
     }
 }
