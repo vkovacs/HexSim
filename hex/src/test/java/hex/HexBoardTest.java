@@ -1,11 +1,12 @@
-package hu.crs.hex;
+package hex;
 
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -18,9 +19,9 @@ class HexBoardTest {
         //then
         assertThat(hexBoard.stream()
                 .filter(e -> e == Hex.EMPTY)
-                .count(), is(5L));
+                .count(), CoreMatchers.is(5L));
 
-        hexBoard.forEach(hex -> assertThat(hex, is(Hex.EMPTY)));
+        hexBoard.forEach(hex -> MatcherAssert.assertThat(hex, CoreMatchers.is(Hex.EMPTY)));
     }
 
     @ParameterizedTest
@@ -40,6 +41,6 @@ class HexBoardTest {
         var hexBoard = new HexBoard<>(rowCount, colCount, Hex.EMPTY);
 
         //when - then
-        assertThat(hexBoard.getSize(), is(expectedSize));
+        assertThat(hexBoard.size(), CoreMatchers.is(expectedSize));
     }
 }

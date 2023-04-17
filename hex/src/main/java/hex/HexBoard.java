@@ -1,4 +1,4 @@
-package hu.crs.hex;
+package hex;
 
 import lombok.Value;
 
@@ -58,7 +58,7 @@ public class HexBoard<T> implements Iterable<T> {
         }
     }
 
-    public int getSize() {
+    public int size() {
         int shortRowsCount = rowCount / 2;
         int longRowsCount = rowCount - shortRowsCount;
         return longRowsCount * colCount + shortRowsCount * (colCount - 1);
