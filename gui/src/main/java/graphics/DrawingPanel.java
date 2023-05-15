@@ -9,21 +9,21 @@ import java.awt.Graphics;
 import java.util.List;
 
 public class DrawingPanel extends JPanel {
-    private final HexBoard<Hex> hexBoard = new HexBoard<>(10, 5, Hex.EMPTY);
+    private final HexBoard<Hex> hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         int radius = 12;
-        int baseLineRow = radius;
-        int baseLineCol = radius * 2;
 
         int rowCounter = 0;
         for (List<Hex> row : hexBoard.getBoard()) {
             int colCounter = 0;
             for (Hex hex : row) {
-                HexShape.paint(g, baseLineCol + colCounter * 12*2, baseLineRow + rowCounter * 12*2, radius);
+                var colOffset = rowCounter % 2 == 1 ? radius *2 : radius;
+                var rowOffset = radius;
+                HexShape.paint(g, colOffset + colCounter * radius * 2, rowOffset + rowCounter * radius * 2 , radius);
                 colCounter++;
             }
             rowCounter++;
