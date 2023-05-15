@@ -103,6 +103,10 @@ public class HexBoard<T> implements Iterable<T> {
                 .collect(Collectors.toSet());
     }
 
+    public List<List<T>> getBoard() { //FIXME: use lombok
+        return board;
+    }
+
     private class HexBoardIterator implements Iterator<T> {
 
         int i = 0;

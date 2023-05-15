@@ -1,3 +1,4 @@
 rootProject.name = 'HexSim'
 include 'hex'
+include 'gui'
 
