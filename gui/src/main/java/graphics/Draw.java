@@ -22,7 +22,7 @@ public class Draw {
         // Draw the hexagon
         var g2d = (Graphics2D) g;
         g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(4));
+        g2d.setStroke(new BasicStroke(1));
         g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
     }
 }

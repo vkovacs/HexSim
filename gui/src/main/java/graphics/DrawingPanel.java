@@ -16,28 +16,40 @@ public class DrawingPanel extends JPanel {
     private final int HORIZONTAL_SPACING = HEX_WIDTH;
     private final int VERTICAL_SPACING = (int) Math.round(HEX_SIZE * (3d / 2d));
     private final HexBoard<Hex> hexBoard = new HexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
-    private final HexBoard<Coordinate> hexCenters = new HexBoard<>(ROW_COUNT, COL_COUNT, new Coordinate(-1, -1));
+    private final HexBoard<Coordinate> hexCenters;
+
+    {
+        hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HORIZONTAL_SPACING, VERTICAL_SPACING);
+    }
+
+    private HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int size, int horizontalSpacing, int verticalSpacing) {
+        var hexCenters = new HexBoard<>(rowCount, colCount, new Coordinate(-1, -1));
+        final int width = size * 2;
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                if (hexCenters.isLastColInRow(i, j)) continue;
+
+                var colOffset = i % 2 == 1 ? width : size;
+                var rowOffset = verticalSpacing;
+
+                var centerX = colOffset + j * horizontalSpacing;
+                var centerY = rowOffset + i * verticalSpacing;
+
+                hexCenters.set(i, j, new Coordinate(centerX, centerY));
+            }
+        }
+
+        return hexCenters;
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g);
+        drawGrid(g, hexCenters);
     }
 
-    private void drawGrid(Graphics g) {
-        for (int i = 0; i < ROW_COUNT; i++) {
-            for (int j = 0; j < COL_COUNT; j++) {
-                var colOffset = i % 2 == 1 ? HEX_WIDTH : HEX_WIDTH / 2;
-                var rowOffset = VERTICAL_SPACING;
-
-                var centerX = colOffset + j * HORIZONTAL_SPACING;
-                var centerY = rowOffset + i * VERTICAL_SPACING;
-
-                Draw.hex(g, centerX, centerY, HEX_SIZE);
-                hexCenters.set(i, j, new Coordinate(centerX, centerY));
-            }
-        }
-        System.out.println("a");
+    private void drawGrid(Graphics g, HexBoard<Coordinate> hexCenters) {
+        hexCenters.forEach(hexCenter -> Draw.hex(g, hexCenter.row(), hexCenter.col(), HEX_SIZE));
     }
 
 

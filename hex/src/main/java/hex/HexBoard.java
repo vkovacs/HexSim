@@ -43,6 +43,9 @@ public class HexBoard<T> implements Iterable<T> {
         board.get(x).set(y, t);
     }
 
+    public boolean isLastColInRow(int row, int col) {
+        return col == maxColInRow(row);
+    }
     private int maxColInRow(int row) {
         if (row % 2 == 0) return colCount;
         return colCount - 1;
