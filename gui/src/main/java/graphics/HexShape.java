@@ -17,7 +17,9 @@ public class HexShape {
         }
 
         // Draw the hexagon
-        g.setColor(Color.RED);
-        g.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
+        var g2d = (Graphics2D) g;
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(4));
+        g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
     }
 }

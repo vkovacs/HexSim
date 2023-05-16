@@ -9,13 +9,13 @@ import java.awt.Graphics;
 import java.util.List;
 
 public class DrawingPanel extends JPanel {
-    private final HexBoard<Hex> hexBoard = new HexBoard<>(10, 10, Hex.EMPTY);
+    private final HexBoard<Hex> hexBoard = new HexBoard<>(10, 20, Hex.EMPTY);
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        final int size = 24;
+        final int size = 48;
         final int width = (int) (Math.sqrt(3) * size);
         final int horizontalSpacing = width;
         final int verticalSpacing = (int) Math.round(size * (3d / 2d));
