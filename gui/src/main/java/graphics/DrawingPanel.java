@@ -19,17 +19,16 @@ public class DrawingPanel extends JPanel {
     private final HexBoard<Coordinate> hexCenters;
 
     {
-        hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HORIZONTAL_SPACING, VERTICAL_SPACING);
+        hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
     }
 
-    private HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int size, int horizontalSpacing, int verticalSpacing) {
+    private HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int size, int width, int horizontalSpacing, int verticalSpacing) {
         var hexCenters = new HexBoard<>(rowCount, colCount, new Coordinate(-1, -1));
-        final int width = size * 2;
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < colCount; j++) {
                 if (hexCenters.isLastColInRow(i, j)) continue;
 
-                var colOffset = i % 2 == 1 ? width : size + 8 ; //FIXME
+                var colOffset = i % 2 == 1 ? width : width / 2 ;
                 var rowOffset = verticalSpacing;
 
                 var centerX = colOffset + j * horizontalSpacing;
