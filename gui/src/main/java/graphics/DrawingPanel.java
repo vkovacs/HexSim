@@ -29,7 +29,7 @@ public class DrawingPanel extends JPanel {
             for (int j = 0; j < colCount; j++) {
                 if (hexCenters.isLastColInRow(i, j)) continue;
 
-                var colOffset = i % 2 == 1 ? width : size;
+                var colOffset = i % 2 == 1 ? width : size + 8 ; //FIXME
                 var rowOffset = verticalSpacing;
 
                 var centerX = colOffset + j * horizontalSpacing;
