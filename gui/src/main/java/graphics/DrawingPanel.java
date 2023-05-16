@@ -1,5 +1,6 @@
 package graphics;
 
+import hex.Coordinate;
 import hex.Hex;
 import hex.HexBoard;
 
@@ -15,6 +16,7 @@ public class DrawingPanel extends JPanel {
     private final int HORIZONTAL_SPACING = HEX_WIDTH;
     private final int VERTICAL_SPACING = (int) Math.round(HEX_SIZE * (3d / 2d));
     private final HexBoard<Hex> hexBoard = new HexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
+    private final HexBoard<Coordinate> hexCenters = new HexBoard<>(ROW_COUNT, COL_COUNT, new Coordinate(-1, -1));
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -27,10 +29,15 @@ public class DrawingPanel extends JPanel {
             for (int j = 0; j < COL_COUNT; j++) {
                 var colOffset = i % 2 == 1 ? HEX_WIDTH : HEX_WIDTH / 2;
                 var rowOffset = VERTICAL_SPACING;
-                Draw.hex(g, colOffset + j * HORIZONTAL_SPACING, rowOffset + i * VERTICAL_SPACING, HEX_SIZE);
-            }
 
+                var centerX = colOffset + j * HORIZONTAL_SPACING;
+                var centerY = rowOffset + i * VERTICAL_SPACING;
+
+                Draw.hex(g, centerX, centerY, HEX_SIZE);
+                hexCenters.set(i, j, new Coordinate(centerX, centerY));
+            }
         }
+        System.out.println("a");
     }
 
 

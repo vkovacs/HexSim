@@ -1,12 +1,12 @@
 package hex;
 
 
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,9 +20,9 @@ class HexBoardTest {
         //then
         assertThat(hexBoard.stream()
                 .filter(e -> e == Hex.EMPTY)
-                .count(), CoreMatchers.is(5L));
+                .count(), is(5L));
 
-        hexBoard.forEach(hex -> MatcherAssert.assertThat(hex, CoreMatchers.is(Hex.EMPTY)));
+        hexBoard.forEach(hex -> MatcherAssert.assertThat(hex, is(Hex.EMPTY)));
     }
 
     @ParameterizedTest
@@ -42,7 +42,7 @@ class HexBoardTest {
         var hexBoard = new HexBoard<>(rowCount, colCount, Hex.EMPTY);
 
         //when - then
-        assertThat(hexBoard.size(), CoreMatchers.is(expectedSize));
+        assertThat(hexBoard.size(), is(expectedSize));
     }
 
     @Test
@@ -151,5 +151,32 @@ class HexBoardTest {
 
         //then
         assertThat(neighbours, containsInAnyOrder(new Coordinate(0, 2), new Coordinate(1, 2), new Coordinate(2, 2), new Coordinate(2, 1), new Coordinate(1, 0), new Coordinate(0, 1)));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0,0", "0,1", "1,0"})
+    void getBoardElement(int x, int y) {
+        //given
+        var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
+
+        //when
+        var hex = hexBoard.get(x, y);
+
+        //then
+        assertThat(hex, is(Hex.EMPTY));
+    }
+
+    @Test
+    void setBoardElement() {
+        //given
+        var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
+
+        //when
+        hexBoard.set(1, 0, Hex.GRASS);
+
+        //then
+        assertThat(hexBoard.get(0, 0), is(Hex.EMPTY));
+        assertThat(hexBoard.get(0, 1), is(Hex.EMPTY));
+        assertThat(hexBoard.get(1, 0), is(Hex.GRASS));
     }
 }
