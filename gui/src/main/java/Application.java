@@ -1,10 +1,11 @@
 import graphics.DrawingPanel;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
-public class DrawingApp extends JFrame {
+public class Application extends JFrame {
 
-    public DrawingApp() {
+    public Application() {
         setTitle("Hexagon Drawing Example");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -17,7 +18,7 @@ public class DrawingApp extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            DrawingApp app = new DrawingApp();
+            Application app = new Application();
             app.setVisible(true);
         });
     }
