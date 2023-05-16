@@ -15,15 +15,18 @@ public class DrawingPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        int radius = 12;
+        final int size = 12;
+        final int width = 2 * size;
+        final int horizontalSpacing = width;
+        final int verticalSpacing = (int) Math.round(size * (3d / 2d));
 
         int rowCounter = 0;
         for (List<Hex> row : hexBoard.getBoard()) {
             int colCounter = 0;
             for (Hex hex : row) {
-                var colOffset = rowCounter % 2 == 1 ? radius *2 : radius;
-                var rowOffset = radius;
-                HexShape.paint(g, colOffset + colCounter * radius * 2, rowOffset + rowCounter * radius * 2 , radius);
+                var colOffset = rowCounter % 2 == 1 ? width : size;
+                var rowOffset = verticalSpacing;
+                HexShape.paint(g, colOffset + colCounter * horizontalSpacing, rowOffset + rowCounter * verticalSpacing , size);
                 colCounter++;
             }
             rowCounter++;
