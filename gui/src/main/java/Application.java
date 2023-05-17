@@ -35,13 +35,13 @@ public class Application extends JFrame {
             setVisible(true);
             var simulationThread = new Thread(() -> {
                 int i = 0;
-                while (i < 50) {
+                while (true) {
                     foxRabbitSimulation.step();
                     hexGridPanel.hexBoard(foxRabbitSimulation.hexBoard());
                     SwingUtilities.invokeLater(hexGridPanel::repaint);
                     i++;
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                         System.out.println("wait..");
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
