@@ -30,22 +30,22 @@ public class HexBoard<T> implements Iterable<T> {
 
     }
 
-    public T get(int x, int y) {
-        if (x < 0 || y < 0 || x >= rowCount || y >= colCount)
+    public T getHex(int row, int col) {
+        if (row < 0 || col < 0 || row >= rowCount || col >= colCount)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard");
-        if (x % 2 == 1 && y == colCount - 1)
+        if (row % 2 == 1 && col == colCount - 1)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard, that row does not contain that Hex");
 
-        return board.get(x).get(y);
+        return board.get(row).get(col);
     }
 
-    public void set(int x, int y, T t) {
-        if (x < 0 || y < 0 || x >= rowCount || y >= colCount)
+    public void setHex(int row, int col, T t) {
+        if (row < 0 || col < 0 || row >= rowCount || col >= colCount)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard");
-        if (x % 2 == 1 && y == colCount - 1)
+        if (row % 2 == 1 && col == colCount - 1)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard, that row does not contain that Hex");
 
-        board.get(x).set(y, t);
+        board.get(row).set(col, t);
     }
 
     public int maxColInRow(int row) {

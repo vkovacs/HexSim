@@ -17,18 +17,11 @@ public class DrawingPanel extends JPanel {
     private final int HEX_WIDTH = (int) (Math.sqrt(3) * HEX_SIZE);
     private final int HORIZONTAL_SPACING = HEX_WIDTH;
     private final int VERTICAL_SPACING = (int) Math.round(HEX_SIZE * (3d / 2d));
-    private final ComplexHexBoard<Hex> hexBoard;
-    private final HexBoard<Coordinate> hexCenters;
+    private final ComplexHexBoard<Hex> hexBoard = new ComplexHexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
+    private final HexBoard<Coordinate> hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
 
     {
-        hexBoard = new ComplexHexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
-
-
-        hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
-    }
-
-    {
-        hexBoard.set(0,0, new HexProperties<>(new Coordinate(0,0), Hex.GRASS));
+        hexBoard.set(0,0, Hex.GRASS);
     }
 
     private HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int size, int width, int horizontalSpacing, int verticalSpacing) {
@@ -43,7 +36,7 @@ public class DrawingPanel extends JPanel {
                 var centerX = colOffset + j * horizontalSpacing;
                 var centerY = rowOffset + i * verticalSpacing;
 
-                hexCenters.set(i, j, new Coordinate(centerX, centerY));
+                hexCenters.setHex(i, j, new Coordinate(centerX, centerY));
             }
         }
 
@@ -58,7 +51,7 @@ public class DrawingPanel extends JPanel {
 
     private void drawGrid(Graphics g, HexBoard<HexProperties<Hex>> hexBoard, HexBoard<Coordinate> hexCenters) {
         hexBoard.forEach(hexProperties -> {
-                    var hexCenter = hexCenters.get(hexProperties.id().row(), hexProperties.id().col());
+                    var hexCenter = hexCenters.getHex(hexProperties.id().row(), hexProperties.id().col());
                     Draw.hex(g, hexCenter.row(), hexCenter.col(), HEX_SIZE, hexProperties.content());
                 }
         );

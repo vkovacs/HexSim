@@ -18,7 +18,8 @@ public class ComplexHexBoard<T> extends HexBoard<HexProperties<T>> {
         }
     }
 
-    public ComplexHexBoard(int rowCount, int colCount) {
-        super(rowCount, colCount);
+    public void set(int row, int col, T grass) {
+        var actual = getHex(row, col);
+        setHex(row, col, new HexProperties<>(actual.id(), grass));
     }
 }

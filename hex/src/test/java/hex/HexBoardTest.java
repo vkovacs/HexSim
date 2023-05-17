@@ -32,7 +32,7 @@ class HexBoardTest {
         var hexBoard = new HexBoard<>(2, 3, Hex.EMPTY);
 
         //when - then
-        assertThrows(IndexOutOfBoundsException.class, () -> hexBoard.get(x, y), "Indexed out of HexBoard");
+        assertThrows(IndexOutOfBoundsException.class, () -> hexBoard.getHex(x, y), "Indexed out of HexBoard");
     }
 
     @ParameterizedTest
@@ -160,7 +160,7 @@ class HexBoardTest {
         var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
 
         //when
-        var hex = hexBoard.get(x, y);
+        var hex = hexBoard.getHex(x, y);
 
         //then
         assertThat(hex, is(Hex.EMPTY));
@@ -172,11 +172,11 @@ class HexBoardTest {
         var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
 
         //when
-        hexBoard.set(1, 0, Hex.GRASS);
+        hexBoard.setHex(1, 0, Hex.GRASS);
 
         //then
-        assertThat(hexBoard.get(0, 0), is(Hex.EMPTY));
-        assertThat(hexBoard.get(0, 1), is(Hex.EMPTY));
-        assertThat(hexBoard.get(1, 0), is(Hex.GRASS));
+        assertThat(hexBoard.getHex(0, 0), is(Hex.EMPTY));
+        assertThat(hexBoard.getHex(0, 1), is(Hex.EMPTY));
+        assertThat(hexBoard.getHex(1, 0), is(Hex.GRASS));
     }
 }
