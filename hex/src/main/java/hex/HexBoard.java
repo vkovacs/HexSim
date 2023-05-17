@@ -27,7 +27,6 @@ public class HexBoard<T> implements Iterable<T> {
             throw new IllegalArgumentException("RowCount and ColCount must be larger than 0!");
         this.rowCount = rowCount;
         this.colCount = colCount;
-
     }
 
     public T getHex(int row, int col) {
@@ -117,12 +116,7 @@ public class HexBoard<T> implements Iterable<T> {
                 .collect(Collectors.toSet());
     }
 
-    public List<List<T>> getBoard() { //FIXME: use lombok
-        return board;
-    }
-
-    protected class HexBoardIterator implements Iterator<T> {
-
+    private class HexBoardIterator implements Iterator<T> {
         int i = 0;
         int j = 0;
 
@@ -144,5 +138,16 @@ public class HexBoard<T> implements Iterable<T> {
 
             return actual;
         }
+    }
+
+    public enum Parity {
+            EVEN, ODD
+        }
+
+    public record Offset(int row, int col) {
+    }
+
+    public enum Direction {
+        NW, NE, E, SE, SW, W
     }
 }
