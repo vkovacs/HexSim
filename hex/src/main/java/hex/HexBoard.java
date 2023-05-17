@@ -116,6 +116,14 @@ public class HexBoard<T> implements Iterable<T> {
                 .collect(Collectors.toSet());
     }
 
+    public int rowCount() {
+        return rowCount;
+    }
+
+    public int colCount() {
+        return colCount;
+    }
+
     private class HexBoardIterator implements Iterator<T> {
         int i = 0;
         int j = 0;

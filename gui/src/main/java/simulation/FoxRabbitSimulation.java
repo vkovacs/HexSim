@@ -5,13 +5,14 @@ import hex.Hex;
 
 import java.util.List;
 
-import static simulation.SimulationConfig.COL_COUNT;
-import static simulation.SimulationConfig.ROW_COUNT;
-
 public class FoxRabbitSimulation {
-    private final ComplexHexBoard<Hex> hexBoard = new ComplexHexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
+    private final ComplexHexBoard<Hex> hexBoard;
 
-    public void randomInitialize(int rowCount, int colCount, List<HexProbability> hexProbabilities) {
+    public FoxRabbitSimulation(int rowCount, int colCount, Hex defaultHex) {
+        hexBoard = new ComplexHexBoard<>(rowCount, colCount, defaultHex);
+    }
+
+    public void randomInitialize(List<HexProbability> hexProbabilities) {
         var probabilitySum = hexProbabilities.stream()
                 .map(HexProbability::probability)
                 .mapToDouble(Double::doubleValue)
@@ -21,7 +22,7 @@ public class FoxRabbitSimulation {
             throw new IllegalArgumentException("Probability sum must not be greater than 1");
         }
 
-        for (int i = 0; i < rowCount; i++) {
+        for (int i = 0; i < hexBoard.rowCount(); i++) {
             int maxJ = hexBoard.maxColInRow(i);
             for (int j = 0; j < maxJ; j++) {
                 var randomHex = randomHexContent(hexProbabilities);

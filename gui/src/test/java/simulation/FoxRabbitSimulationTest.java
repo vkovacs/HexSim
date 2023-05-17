@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FoxRabbitSimulationTest {
 
-    private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation();
+    private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation(1,1,Hex.EMPTY);
 
     @Test
     public void shouldThrowExceptionIfProbabilitySumIsLargerThan1() {
