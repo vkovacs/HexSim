@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 import java.awt.Toolkit;
 
 import static simulation.SimulationConfig.COL_COUNT;
+import static simulation.SimulationConfig.DELAY_MILIS;
 import static simulation.SimulationConfig.ROW_COUNT;
 
 public class Application extends JFrame {
@@ -41,8 +42,7 @@ public class Application extends JFrame {
                     SwingUtilities.invokeLater(hexGridPanel::repaint);
                     i++;
                     try {
-                        Thread.sleep(10);
-                        System.out.println("wait..");
+                        Thread.sleep(DELAY_MILIS);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
