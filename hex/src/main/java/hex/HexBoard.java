@@ -1,7 +1,5 @@
 package hex;
 
-import lombok.Value;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-@Value
 public class HexBoard<T> implements Iterable<T> {
     int rowCount;
     int colCount;
@@ -51,9 +48,6 @@ public class HexBoard<T> implements Iterable<T> {
         board.get(x).set(y, t);
     }
 
-    public boolean isLastColInRow(int row, int col) {
-        return col == maxColInRow(row);
-    }
     public int maxColInRow(int row) {
         if (row % 2 == 0) return colCount;
         return colCount - 1;
@@ -72,7 +66,7 @@ public class HexBoard<T> implements Iterable<T> {
         return new HexBoardIterator();
     }
 
-    private void fill(T hex) {
+    protected void fill(T hex) {
         for (int i = 0; i < rowCount; i++) {
             List<T> row = new ArrayList<>();
             int maxJ = maxColInRow(i);
@@ -127,7 +121,7 @@ public class HexBoard<T> implements Iterable<T> {
         return board;
     }
 
-    private class HexBoardIterator implements Iterator<T> {
+    protected class HexBoardIterator implements Iterator<T> {
 
         int i = 0;
         int j = 0;
