@@ -13,15 +13,6 @@ public class FoxRabbitSimulation {
     }
 
     public void randomInitialize(List<HexProbability> hexProbabilities) {
-        var probabilitySum = hexProbabilities.stream()
-                .map(HexProbability::probability)
-                .mapToDouble(Double::doubleValue)
-                .sum();
-
-        if (probabilitySum > 1) {
-            throw new IllegalArgumentException("Probability sum must not be greater than 1");
-        }
-
         for (int i = 0; i < hexBoard.rowCount(); i++) {
             int maxJ = hexBoard.maxColInRow(i);
             for (int j = 0; j < maxJ; j++) {
@@ -31,11 +22,7 @@ public class FoxRabbitSimulation {
         }
     }
 
-    public ComplexHexBoard<Hex> hexBoard() {
-        return hexBoard;
-    }
-
-    public Hex randomHexContent(List<HexProbability> hexProbabilities) {
+    Hex randomHexContent(List<HexProbability> hexProbabilities) {
         var probabilitySum = hexProbabilities.stream()
                 .map(HexProbability::probability)
                 .mapToDouble(Double::doubleValue)
@@ -59,5 +46,9 @@ public class FoxRabbitSimulation {
         }
 
         return Hex.EMPTY;
+    }
+
+    public ComplexHexBoard<Hex> hexBoard() {
+        return hexBoard;
     }
 }
