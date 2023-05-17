@@ -38,6 +38,10 @@ public class HexBoard<T> implements Iterable<T> {
         return board.get(row).get(col);
     }
 
+    public T getHex(Coordinate coordinate) {
+        return getHex(coordinate.row(), coordinate.col());
+    }
+
     public void setHex(int row, int col, T t) {
         if (row < 0 || col < 0 || row >= rowCount || col >= colCount)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard");

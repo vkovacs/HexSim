@@ -1,6 +1,6 @@
 package hu.crs.hexsim;
 
-import hex.Hex;
+import hex.HexEntity;
 import hex.HexBoard;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,7 @@ public class HexSim implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        var hexBoard = new HexBoard<>(3, 4, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 4, HexEntity.EMPTY);
         System.out.println("Hello World " + hexBoard.size());
     }
 }

@@ -15,21 +15,21 @@ class HexBoardTest {
     @Test
     void fillBoardWithEmpty() {
         //given - when
-        var hexBoard = new HexBoard<>(2, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(2, 3, HexEntity.EMPTY);
 
         //then
         assertThat(hexBoard.stream()
-                .filter(e -> e == Hex.EMPTY)
+                .filter(e -> e == HexEntity.EMPTY)
                 .count(), is(5L));
 
-        hexBoard.forEach(hex -> MatcherAssert.assertThat(hex, is(Hex.EMPTY)));
+        hexBoard.forEach(hex -> MatcherAssert.assertThat(hex, is(HexEntity.EMPTY)));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"-1,-1", "-1,0", "1,3", "2,2", "2,3"})
     void detectOutOfBoundIndexes(int x, int y) {
         //given
-        var hexBoard = new HexBoard<>(2, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(2, 3, HexEntity.EMPTY);
 
         //when - then
         assertThrows(IndexOutOfBoundsException.class, () -> hexBoard.getHex(x, y), "Indexed out of HexBoard");
@@ -39,7 +39,7 @@ class HexBoardTest {
     @CsvSource(value = {"1,1,1", "3,4,11", "4,4,14"})
     void calculateSize(int rowCount, int colCount, int expectedSize) {
         //given
-        var hexBoard = new HexBoard<>(rowCount, colCount, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(rowCount, colCount, HexEntity.EMPTY);
 
         //when - then
         assertThat(hexBoard.size(), is(expectedSize));
@@ -48,7 +48,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours00() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(0, 0));
@@ -60,7 +60,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours01() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(0, 1));
@@ -72,7 +72,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours02() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(0, 2));
@@ -84,7 +84,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours10() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(1, 0));
@@ -96,7 +96,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours11() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(1, 1));
@@ -108,7 +108,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours22() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(2, 2));
@@ -120,7 +120,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours21() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(2, 1));
@@ -132,7 +132,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours20() {
         //given
-        var hexBoard = new HexBoard<>(3, 3, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(3, 3, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(2, 0));
@@ -144,7 +144,7 @@ class HexBoardTest {
     @Test
     void calculateNeighbours11In4x4Board() {
         //given
-        var hexBoard = new HexBoard<>(4, 4, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(4, 4, HexEntity.EMPTY);
 
         //when
         var neighbours = hexBoard.neighbours(new Coordinate(1, 1));
@@ -157,26 +157,26 @@ class HexBoardTest {
     @CsvSource(value = {"0,0", "0,1", "1,0"})
     void getBoardElement(int x, int y) {
         //given
-        var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(2, 2, HexEntity.EMPTY);
 
         //when
         var hex = hexBoard.getHex(x, y);
 
         //then
-        assertThat(hex, is(Hex.EMPTY));
+        assertThat(hex, is(HexEntity.EMPTY));
     }
 
     @Test
     void setBoardElement() {
         //given
-        var hexBoard = new HexBoard<>(2, 2, Hex.EMPTY);
+        var hexBoard = new HexBoard<>(2, 2, HexEntity.EMPTY);
 
         //when
-        hexBoard.setHex(1, 0, Hex.GRASS);
+        hexBoard.setHex(1, 0, HexEntity.GRASS);
 
         //then
-        assertThat(hexBoard.getHex(0, 0), is(Hex.EMPTY));
-        assertThat(hexBoard.getHex(0, 1), is(Hex.EMPTY));
-        assertThat(hexBoard.getHex(1, 0), is(Hex.GRASS));
+        assertThat(hexBoard.getHex(0, 0), is(HexEntity.EMPTY));
+        assertThat(hexBoard.getHex(0, 1), is(HexEntity.EMPTY));
+        assertThat(hexBoard.getHex(1, 0), is(HexEntity.GRASS));
     }
 }

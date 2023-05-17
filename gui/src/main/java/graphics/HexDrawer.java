@@ -1,7 +1,7 @@
 package graphics;
 
 import hex.Coordinate;
-import hex.Hex;
+import hex.HexEntity;
 import hex.HexBoard;
 
 import java.awt.BasicStroke;
@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class HexDrawer {
     private static final int HEXAGON_SIDES = 6;
 
-    public static void draw(Graphics g, int centerX, int centerY, int size, Hex content) {
+    public static void draw(Graphics g, int centerX, int centerY, int size, HexEntity content) {
         // Calculate the vertices of the hexagon
         int[] xPoints = new int[HEXAGON_SIDES];
         int[] yPoints = new int[HEXAGON_SIDES];

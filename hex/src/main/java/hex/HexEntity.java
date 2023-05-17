@@ -1,5 +1,5 @@
 package hex;
 
-public enum Hex {
+public enum HexEntity {
     EMPTY, FOX, RABBIT, GRASS
 }

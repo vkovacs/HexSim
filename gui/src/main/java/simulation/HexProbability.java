@@ -1,7 +1,7 @@
 package simulation;
 
-import hex.Hex;
+import hex.HexEntity;
 
-public record HexProbability(Hex hex, double probability) {
+public record HexProbability(HexEntity hexEntity, double probability) {
 
 }
