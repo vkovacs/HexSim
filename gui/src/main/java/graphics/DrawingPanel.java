@@ -35,6 +35,10 @@ public class DrawingPanel extends JPanel {
         hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
     }
 
+    {
+        hexBoard.set(0,0, new HexProperties<>(new Coordinate(0,0), Hex.GRASS));
+    }
+
     private HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int size, int width, int horizontalSpacing, int verticalSpacing) {
         var hexCenters = new HexBoard<>(rowCount, colCount, new Coordinate(-1, -1));
         for (int i = 0; i < rowCount; i++) {
