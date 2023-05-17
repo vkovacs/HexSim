@@ -12,6 +12,7 @@ public class FoxRabbitSimulation {
 
     public FoxRabbitSimulation(int rowCount, int colCount, HexEntity defaultHexEntity) {
         hexBoard = new ComplexHexBoard<>(rowCount, colCount, defaultHexEntity);
+        randomInitialize(List.of(new HexProbability(HexEntity.GRASS, 0.5), new HexProbability(HexEntity.RABBIT, 0.2), new HexProbability(HexEntity.FOX, 0.1)));
     }
 
     public void randomInitialize(List<HexProbability> hexProbabilities) {
