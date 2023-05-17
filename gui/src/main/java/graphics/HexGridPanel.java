@@ -5,12 +5,12 @@ import hex.Hex;
 import hex.HexBoard;
 import hex.HexProperties;
 import simulation.FoxRabbitSimulation;
+import simulation.HexProbability;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static simulation.SimulationConfig.COL_COUNT;
 import static simulation.SimulationConfig.HEX_SIZE;
@@ -27,7 +27,7 @@ public class HexGridPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        foxRabbitSimulation.randomInitialize(ROW_COUNT, COL_COUNT, Map.of(Hex.GRASS, 0.3, Hex.RABBIT, 0.2, Hex.FOX, 0.1));
+        foxRabbitSimulation.randomInitialize(ROW_COUNT, COL_COUNT, List.of(new HexProbability(Hex.GRASS, 0.3), new HexProbability(Hex.RABBIT, 0.2), new HexProbability(Hex.FOX, 0.1)));
         drawGrid(g, foxRabbitSimulation.hexBoard(), hexCenters);
     }
 

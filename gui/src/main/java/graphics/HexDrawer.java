@@ -29,11 +29,19 @@ public class HexDrawer {
 
         switch (content) {
             case EMPTY -> {
-                g2d.setColor(Color.BLACK);
-                g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
+                g2d.setColor(Color.DARK_GRAY);
+                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
             }
             case GRASS -> {
                 g2d.setColor(Color.GREEN);
+                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
+            }
+            case RABBIT -> {
+                g2d.setColor(Color.WHITE);
+                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
+            }
+            case FOX -> {
+                g2d.setColor(Color.RED);
                 g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
             }
             default -> throw new IllegalArgumentException("Invalid Hex content!");
