@@ -3,10 +3,13 @@ package graphics;
 import hex.Coordinate;
 import hex.Hex;
 import hex.HexBoard;
+import hex.HexProperties;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DrawingPanel extends JPanel {
     private final int ROW_COUNT = 10;
@@ -15,10 +18,20 @@ public class DrawingPanel extends JPanel {
     private final int HEX_WIDTH = (int) (Math.sqrt(3) * HEX_SIZE);
     private final int HORIZONTAL_SPACING = HEX_WIDTH;
     private final int VERTICAL_SPACING = (int) Math.round(HEX_SIZE * (3d / 2d));
-    private final HexBoard<Hex> hexBoard = new HexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
+    private final HexBoard<HexProperties<Hex>> hexBoard;
     private final HexBoard<Coordinate> hexCenters;
 
     {
+        hexBoard = new HexBoard<>(ROW_COUNT, COL_COUNT);
+        for (int i = 0; i < ROW_COUNT; i++) {
+            List<HexProperties<Hex>> row = new ArrayList<>();
+            int maxJ = hexBoard.maxColInRow(i);
+            for (int j = 0; j < maxJ; j++) {
+                row.add(new HexProperties<>(new Coordinate(i, j), Hex.EMPTY));
+            }
+            hexBoard.getBoard().add(row);
+        }
+
         hexCenters = hexCenters(ROW_COUNT, COL_COUNT, HEX_SIZE, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
     }
 
@@ -26,9 +39,9 @@ public class DrawingPanel extends JPanel {
         var hexCenters = new HexBoard<>(rowCount, colCount, new Coordinate(-1, -1));
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < colCount; j++) {
-                if (hexCenters.isLastColInRow(i, j)) continue;
+                if (hexCenters.maxColIndexInRow(i) < j) continue;
 
-                var colOffset = i % 2 == 1 ? width : width / 2 ;
+                var colOffset = i % 2 == 1 ? width : width / 2;
                 var rowOffset = verticalSpacing;
 
                 var centerX = colOffset + j * horizontalSpacing;
@@ -44,11 +57,15 @@ public class DrawingPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g, hexCenters);
+        drawGrid(g, hexBoard, hexCenters);
     }
 
-    private void drawGrid(Graphics g, HexBoard<Coordinate> hexCenters) {
-        hexCenters.forEach(hexCenter -> Draw.hex(g, hexCenter.row(), hexCenter.col(), HEX_SIZE));
+    private void drawGrid(Graphics g, HexBoard<HexProperties<Hex>> hexBoard, HexBoard<Coordinate> hexCenters) {
+        hexBoard.forEach(hexProperties -> {
+                    var hexCenter = hexCenters.get(hexProperties.id().row(), hexProperties.id().col());
+                    Draw.hex(g, hexCenter.row(), hexCenter.col(), HEX_SIZE, hexProperties.content());
+                }
+        );
     }
 
 

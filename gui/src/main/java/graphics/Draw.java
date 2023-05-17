@@ -1,5 +1,7 @@
 package graphics;
 
+import hex.Hex;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,7 +10,7 @@ import java.awt.Graphics2D;
 public class Draw {
     private static final int HEXAGON_SIDES = 6;
 
-    public static void hex(Graphics g, int centerX, int centerY, int size) {
+    public static void hex(Graphics g, int centerX, int centerY, int size, Hex content) {
         // Calculate the vertices of the hexagon
         int[] xPoints = new int[HEXAGON_SIDES];
         int[] yPoints = new int[HEXAGON_SIDES];
@@ -21,8 +23,14 @@ public class Draw {
 
         // Draw the hexagon
         var g2d = (Graphics2D) g;
-        g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
+
+        if (content == Hex.EMPTY) {
+            g2d.setColor(Color.BLACK);
+            g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
+        } else if (content == Hex.GRASS) {
+            g2d.setColor(Color.GREEN);
+            g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
+        }
     }
 }

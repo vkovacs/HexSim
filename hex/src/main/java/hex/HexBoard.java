@@ -25,6 +25,14 @@ public class HexBoard<T> implements Iterable<T> {
         fill(hex);
     }
 
+    public HexBoard(int rowCount, int colCount) {
+        if (rowCount < 1 || colCount < 1)
+            throw new IllegalArgumentException("RowCount and ColCount must be larger than 0!");
+        this.rowCount = rowCount;
+        this.colCount = colCount;
+
+    }
+
     public T get(int x, int y) {
         if (x < 0 || y < 0 || x >= rowCount || y >= colCount)
             throw new IndexOutOfBoundsException("Indexed out of HexBoard");
@@ -46,12 +54,12 @@ public class HexBoard<T> implements Iterable<T> {
     public boolean isLastColInRow(int row, int col) {
         return col == maxColInRow(row);
     }
-    private int maxColInRow(int row) {
+    public int maxColInRow(int row) {
         if (row % 2 == 0) return colCount;
         return colCount - 1;
     }
 
-    private int maxColIndexInRow(int row) {
+    public int maxColIndexInRow(int row) {
         return maxColInRow(row) - 1;
     }
 
