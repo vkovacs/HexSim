@@ -27,12 +27,16 @@ public class HexDrawer {
         var g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(1));
 
-        if (content == Hex.EMPTY) {
-            g2d.setColor(Color.BLACK);
-            g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
-        } else if (content == Hex.GRASS) {
-            g2d.setColor(Color.GREEN);
-            g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
+        switch (content) {
+            case EMPTY -> {
+                g2d.setColor(Color.BLACK);
+                g2d.drawPolygon(xPoints, yPoints, HEXAGON_SIDES);
+            }
+            case GRASS -> {
+                g2d.setColor(Color.GREEN);
+                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
+            }
+            default -> throw new IllegalArgumentException("Invalid Hex content!");
         }
     }
 

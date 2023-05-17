@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import static simulation.SimulationConfig.COL_COUNT;
+import static simulation.SimulationConfig.HEX_SIZE;
+import static simulation.SimulationConfig.HEX_WIDTH;
+import static simulation.SimulationConfig.HORIZONTAL_SPACING;
+import static simulation.SimulationConfig.ROW_COUNT;
+import static simulation.SimulationConfig.VERTICAL_SPACING;
+
 public class DrawingPanel extends JPanel {
-    private final int ROW_COUNT = 10;
-    private final int COL_COUNT = 20;
-    private final int HEX_SIZE = 48;
-    private final int HEX_WIDTH = (int) (Math.sqrt(3) * HEX_SIZE);
-    private final int HORIZONTAL_SPACING = HEX_WIDTH;
-    private final int VERTICAL_SPACING = (int) Math.round(HEX_SIZE * (3d / 2d));
     private final ComplexHexBoard<Hex> hexBoard = new ComplexHexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
     private final HexBoard<Coordinate> hexCenters = HexDrawer.hexCenters(ROW_COUNT, COL_COUNT, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
 
@@ -37,7 +38,6 @@ public class DrawingPanel extends JPanel {
                 }
         );
     }
-
 
     @Override
     public Dimension getPreferredSize() {
