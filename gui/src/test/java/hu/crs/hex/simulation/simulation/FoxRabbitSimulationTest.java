@@ -1,6 +1,6 @@
-package simulation;
+package hu.crs.hex.simulation.simulation;
 
-import hex.HexEntity;
+import hu.crs.hex.HexEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

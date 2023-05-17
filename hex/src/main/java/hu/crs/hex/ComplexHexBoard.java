@@ -1,4 +1,4 @@
-package hex;
+package hu.crs.hex;
 
 import java.util.ArrayList;
 import java.util.Collection;

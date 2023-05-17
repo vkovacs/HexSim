@@ -1,4 +1,4 @@
-package simulation;
+package hu.crs.hex.simulation.simulation;
 
 public class SimulationConfig {
     public static final int ROW_COUNT = 60;

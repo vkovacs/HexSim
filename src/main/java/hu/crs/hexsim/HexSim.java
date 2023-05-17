@@ -1,7 +1,7 @@
 package hu.crs.hexsim;
 
-import hex.HexEntity;
-import hex.HexBoard;
+import hu.crs.hex.HexEntity;
+import hu.crs.hex.HexBoard;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

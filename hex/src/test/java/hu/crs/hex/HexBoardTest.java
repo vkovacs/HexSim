@@ -1,6 +1,9 @@
-package hex;
+package hu.crs.hex;
 
 
+import hu.crs.hex.Coordinate;
+import hu.crs.hex.HexBoard;
+import hu.crs.hex.HexEntity;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

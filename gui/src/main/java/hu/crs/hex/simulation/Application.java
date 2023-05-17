@@ -1,14 +1,16 @@
-import graphics.HexGridPanel;
-import hex.HexEntity;
-import simulation.FoxRabbitSimulation;
+package hu.crs.hex.simulation;
+
+import hu.crs.hex.simulation.graphics.HexGridPanel;
+import hu.crs.hex.HexEntity;
+import hu.crs.hex.simulation.simulation.FoxRabbitSimulation;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Toolkit;
 
-import static simulation.SimulationConfig.COL_COUNT;
-import static simulation.SimulationConfig.DELAY_MILIS;
-import static simulation.SimulationConfig.ROW_COUNT;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.COL_COUNT;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.DELAY_MILIS;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.ROW_COUNT;
 
 public class Application extends JFrame {
     private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, HexEntity.EMPTY);

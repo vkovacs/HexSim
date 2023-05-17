@@ -1,8 +1,8 @@
-package simulation;
+package hu.crs.hex.simulation.simulation;
 
-import hex.ComplexHexBoard;
-import hex.HexEntity;
-import hex.HexField;
+import hu.crs.hex.ComplexHexBoard;
+import hu.crs.hex.HexEntity;
+import hu.crs.hex.HexField;
 
 import java.util.List;
 import java.util.Optional;

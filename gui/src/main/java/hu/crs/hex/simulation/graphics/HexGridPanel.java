@@ -1,21 +1,21 @@
-package graphics;
+package hu.crs.hex.simulation.graphics;
 
-import hex.ComplexHexBoard;
-import hex.Coordinate;
-import hex.HexBoard;
-import hex.HexEntity;
-import hex.HexField;
+import hu.crs.hex.ComplexHexBoard;
+import hu.crs.hex.Coordinate;
+import hu.crs.hex.HexBoard;
+import hu.crs.hex.HexEntity;
+import hu.crs.hex.HexField;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import static simulation.SimulationConfig.COL_COUNT;
-import static simulation.SimulationConfig.HEX_SIZE;
-import static simulation.SimulationConfig.HEX_WIDTH;
-import static simulation.SimulationConfig.HORIZONTAL_SPACING;
-import static simulation.SimulationConfig.ROW_COUNT;
-import static simulation.SimulationConfig.VERTICAL_SPACING;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.COL_COUNT;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.HEX_SIZE;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.HEX_WIDTH;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.HORIZONTAL_SPACING;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.ROW_COUNT;
+import static hu.crs.hex.simulation.simulation.SimulationConfig.VERTICAL_SPACING;
 
 public class HexGridPanel extends JPanel {
     private final HexBoard<Coordinate> hexCenters = HexDrawer.hexCenters(ROW_COUNT, COL_COUNT, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);

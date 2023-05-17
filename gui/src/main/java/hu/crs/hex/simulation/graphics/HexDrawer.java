@@ -1,8 +1,8 @@
-package graphics;
+package hu.crs.hex.simulation.graphics;
 
-import hex.Coordinate;
-import hex.HexEntity;
-import hex.HexBoard;
+import hu.crs.hex.Coordinate;
+import hu.crs.hex.HexEntity;
+import hu.crs.hex.HexBoard;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
