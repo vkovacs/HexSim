@@ -28,7 +28,7 @@ public class HexGridPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g, hexBoard, hexCenters);
+        drawGrid(g, hexBoard);
     }
 
     public void drawHexField(Graphics g, HexField<HexEntity> hexField) {
@@ -36,7 +36,7 @@ public class HexGridPanel extends JPanel {
         HexDrawer.draw(g, hexCenter.row(), hexCenter.col(), HEX_SIZE, hexField.content());
     }
 
-    private void drawGrid(Graphics g, HexBoard<HexField<HexEntity>> hexBoard, HexBoard<Coordinate> hexCenters) {
+    private void drawGrid(Graphics g, HexBoard<HexField<HexEntity>> hexBoard) {
         hexBoard.forEach(hexField -> drawHexField(g, hexField));
     }
 

@@ -32,27 +32,25 @@ public class Application extends JFrame {
 
     private void start() {
         SwingUtilities.invokeLater(() -> {
-            Application app = new Application();
-            app.setVisible(true);
-            hexGridPanel.repaint();
-
+            setVisible(true);
             var simulationThread = new Thread(() -> {
                 int i = 0;
-                while (i < 5) {
-                    var maybeModifiedHexField = foxRabbitSimulation.step();
-                    maybeModifiedHexField.ifPresent(modifiedHexField -> hexGridPanel.drawHexField(hexGridPanel.getGraphics(), modifiedHexField));
-
+                while (i < 50) {
+                    foxRabbitSimulation.step();
+                    hexGridPanel.hexBoard(foxRabbitSimulation.hexBoard());
+                    SwingUtilities.invokeLater(hexGridPanel::repaint);
                     i++;
-                    hexGridPanel.repaint();
                     try {
-                        Thread.sleep(1_000);
+                        Thread.sleep(100);
                         System.out.println("wait..");
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
-            });
-            simulationThread.start();
-        });
-    }
-}
+            }
+            );
+
+        simulationThread.start();
+});
+        }
+        }
