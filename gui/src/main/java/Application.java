@@ -1,4 +1,4 @@
-import graphics.DrawingPanel;
+import graphics.HexGridPanel;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -9,8 +9,8 @@ public class Application extends JFrame {
         setTitle("Hexagon Drawing Example");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        DrawingPanel drawingPanel = new DrawingPanel();
-        add(drawingPanel);
+        HexGridPanel hexGridPanel = new HexGridPanel();
+        add(hexGridPanel);
 
         pack();
         setLocationRelativeTo(null);

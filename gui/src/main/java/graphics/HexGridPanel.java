@@ -1,10 +1,10 @@
 package graphics;
 
-import hex.ComplexHexBoard;
 import hex.Coordinate;
 import hex.Hex;
 import hex.HexBoard;
 import hex.HexProperties;
+import simulation.FoxRabbitSimulation;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -17,18 +17,16 @@ import static simulation.SimulationConfig.HORIZONTAL_SPACING;
 import static simulation.SimulationConfig.ROW_COUNT;
 import static simulation.SimulationConfig.VERTICAL_SPACING;
 
-public class DrawingPanel extends JPanel {
-    private final ComplexHexBoard<Hex> hexBoard = new ComplexHexBoard<>(ROW_COUNT, COL_COUNT, Hex.EMPTY);
+public class HexGridPanel extends JPanel {
     private final HexBoard<Coordinate> hexCenters = HexDrawer.hexCenters(ROW_COUNT, COL_COUNT, HEX_WIDTH, HORIZONTAL_SPACING, VERTICAL_SPACING);
+    private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation();
 
-    {
-        hexBoard.set(0,0, Hex.GRASS);
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g, hexBoard, hexCenters);
+        foxRabbitSimulation.randomInitialize(ROW_COUNT, COL_COUNT);
+        drawGrid(g, foxRabbitSimulation.hexBoard(), hexCenters);
     }
 
     private void drawGrid(Graphics g, HexBoard<HexProperties<Hex>> hexBoard, HexBoard<Coordinate> hexCenters) {
