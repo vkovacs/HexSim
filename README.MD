@@ -1,19 +1,23 @@
 # Start Application
+# Prerequisites
+* Java 17
+* JAVA_HOME environment variable is set up to point to the path of the JAVA 17 jre.
+
 In the main folder of the application (HexSim) use
 ## Linux
 ~~~
-./gradlew :gui:run
+./gradlew run
 ~~~
 
 ## Windows
 ~~~
-gradlew :gui:run
+gradlew run
 ~~~
 
 # Configuration
 ## Config file location 
 ~~~
-gui/src/main/java/hu/crs/hex/simulation/simulation/SimulationConfig.java
+fox-rabbit-simulation/src/main/java/hu/crs/hex/simulation/foxrabbitsimulation/FoxRabbitSimulationConfig.java
 ~~~
 
 # Resources
