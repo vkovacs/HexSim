@@ -20,10 +20,16 @@ gradlew run
 fox-rabbit-simulation/src/main/java/hu/crs/hex/simulation/foxrabbitsimulation/FoxRabbitSimulationConfig.java
 ~~~
 
-# Module Dependencies
+# Modules
+* hex: Generic tooling for representing hexboards
+* simulation-api: API of the Simulations
+* fox-rabbit-simulation: A concrete simulation simulating interactions of foxes, rabbits and grass
+* gui: A generic gui for representing a simulation
+
+## Dependencies
 ```mermaid
 graph TD;
-    simulation-->hex;
+    simulation-api-->hex;
     fox-rabbit-simulation-->simulation;
     gui-->fox-rabbit-simulation;
 ```
