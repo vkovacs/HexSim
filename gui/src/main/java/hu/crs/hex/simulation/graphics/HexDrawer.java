@@ -13,14 +13,19 @@ public class HexDrawer {
     private static final int HEXAGON_SIDES = 6;
 
     public static void draw(Graphics g, int centerX, int centerY, int size, HexEntity content) {
+
+        double halfPixel = 0.5; //remove thin white line between hexes
+        double shiftedCenterX = centerX + halfPixel;
+        double shiftedCenterY = centerY + halfPixel;
+
         // Calculate the vertices of the hexagon
         int[] xPoints = new int[HEXAGON_SIDES];
         int[] yPoints = new int[HEXAGON_SIDES];
 
         for (int i = 0; i < HEXAGON_SIDES; i++) {
             double angle = 2 * Math.PI / HEXAGON_SIDES * i + Math.PI / 2;
-            xPoints[i] = (int) (centerX + size * Math.cos(angle));
-            yPoints[i] = (int) (centerY + size * Math.sin(angle));
+            xPoints[i] = (int) (shiftedCenterX + size * Math.cos(angle));
+            yPoints[i] = (int) (shiftedCenterY + size * Math.sin(angle));
         }
 
         // Draw the hexagon
