@@ -3,4 +3,5 @@ include 'hex'
 include 'gui'
 include 'fox-rabbit-simulation'
 include 'fox-rabbit-simulation'
+include 'simulation'
 

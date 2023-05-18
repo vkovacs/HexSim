@@ -3,8 +3,6 @@ package hu.crs.hex.simulation;
 import hu.crs.hex.HexEntity;
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig;
-import hu.crs.hex.simulation.foxrabbitsimulation.Simulation;
-import hu.crs.hex.simulation.foxrabbitsimulation.SimulationConfig;
 import hu.crs.hex.simulation.graphics.HexGridPanel;
 
 import javax.swing.JFrame;

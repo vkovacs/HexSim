@@ -4,6 +4,7 @@ import hu.crs.hex.ComplexHexBoard;
 import hu.crs.hex.HexEntity;
 import hu.crs.hex.HexField;
 import hu.crs.hex.HexProbability;
+import hu.crs.hex.simulation.Simulation;
 
 import java.util.List;
 import java.util.Optional;

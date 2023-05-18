@@ -1,4 +1,4 @@
-package hu.crs.hex.simulation.foxrabbitsimulation;
+package hu.crs.hex.simulation;
 
 public interface SimulationConfig {
     int rowCount();

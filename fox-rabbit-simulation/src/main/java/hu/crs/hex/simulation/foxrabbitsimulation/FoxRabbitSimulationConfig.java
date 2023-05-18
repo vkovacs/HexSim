@@ -1,5 +1,7 @@
 package hu.crs.hex.simulation.foxrabbitsimulation;
 
+import hu.crs.hex.simulation.SimulationConfig;
+
 public class FoxRabbitSimulationConfig implements SimulationConfig {
     public static final int ROW_COUNT = 60;
     public static final int COL_COUNT = 100;
