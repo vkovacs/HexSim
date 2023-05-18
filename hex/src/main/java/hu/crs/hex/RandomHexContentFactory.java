@@ -13,8 +13,8 @@ public class RandomHexContentFactory<T> {
                 .mapToDouble(Double::doubleValue)
                 .sum();
 
-        if (probabilitySum > 1) {
-            throw new IllegalArgumentException("Probability sum must not be greater than 1");
+        if (probabilitySum != 1) {
+            throw new IllegalArgumentException("The sum of probabilities must be 1!");
         }
         return cdfSelector(hexProbabilities, random.nextDouble());
     }
@@ -29,11 +29,6 @@ public class RandomHexContentFactory<T> {
                 return hexProbability.content();
             }
         }
-
-        if (cumulativeProbability < randomNumber && randomNumber < 1) {
-            return hexProbabilities.get(hexProbabilities.size() - 1).content();
-        }
-
-        throw new IllegalArgumentException("Illegal generated random number!");
+        throw new IllegalArgumentException("Generated random number doesn't belong to a probability!");
     }
 }

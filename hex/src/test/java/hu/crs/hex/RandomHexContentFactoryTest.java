@@ -1,6 +1,5 @@
 package hu.crs.hex;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -50,11 +49,8 @@ class RandomHexContentFactoryTest {
         //given
         var hexProbabilities = List.of(new HexProbability<>(TestHex.A, 0.3), new HexProbability<>(TestHex.B, 0.3), new HexProbability<>(TestHex.C, 0.1));
 
-        //when
-        var hex = underTest.cdfSelector(hexProbabilities, 0.6);
-
-        //then
-        assertThat(hex, is(TestHex.C));
+        //when - then
+        assertThrows(IllegalArgumentException.class, () -> underTest.cdfSelector(hexProbabilities, 0.8), "Generated random number doesn't belong to a probability!");
     }
 
     @Test
@@ -63,6 +59,6 @@ class RandomHexContentFactoryTest {
         var hexProbabilities = List.of(new HexProbability<>(TestHex.A, 0.3), new HexProbability<>(TestHex.B, 0.3), new HexProbability<>(TestHex.C, 0.4));
 
         //when
-        Assertions.assertThrows(IllegalArgumentException.class, () -> underTest.cdfSelector(hexProbabilities, 1), "Illegal generated random number!");
+        assertThrows(IllegalArgumentException.class, () -> underTest.cdfSelector(hexProbabilities, 1), "Illegal generated random number!");
     }
 }

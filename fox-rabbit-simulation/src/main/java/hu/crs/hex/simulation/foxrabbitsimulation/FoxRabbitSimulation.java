@@ -15,7 +15,7 @@ public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
 
     public FoxRabbitSimulation(int rowCount, int colCount, FoxRabbitHexEntity defaultHexEntity) {
         hexBoard = new ComplexHexBoard<>(rowCount, colCount, defaultHexEntity);
-        randomInitialize(List.of(new HexProbability<>(FoxRabbitHexEntity.GRASS, 0.5), new HexProbability<>(FoxRabbitHexEntity.RABBIT, 0.2), new HexProbability<>(FoxRabbitHexEntity.FOX, 0.1)));
+        randomInitialize(List.of(new HexProbability<>(FoxRabbitHexEntity.GRASS, 0.6), new HexProbability<>(FoxRabbitHexEntity.RABBIT, 0.2), new HexProbability<>(FoxRabbitHexEntity.FOX, 0.1), new HexProbability<>(FoxRabbitHexEntity.EMPTY, 0.1)));
     }
 
     public void randomInitialize(List<HexProbability<FoxRabbitHexEntity>> hexProbabilities) {
