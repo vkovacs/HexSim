@@ -1,8 +1,9 @@
-package hu.crs.hex.simulation.simulation;
+package hu.crs.hex.simulation.foxrabbitsimulation;
 
 import hu.crs.hex.ComplexHexBoard;
 import hu.crs.hex.HexEntity;
 import hu.crs.hex.HexField;
+import hu.crs.hex.HexProbability;
 
 import java.util.List;
 import java.util.Optional;

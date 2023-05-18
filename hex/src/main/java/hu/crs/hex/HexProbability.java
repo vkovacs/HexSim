@@ -1,4 +1,4 @@
-package hu.crs.hex.simulation.simulation;
+package hu.crs.hex;
 
 import hu.crs.hex.HexEntity;
 

@@ -1,6 +1,8 @@
-package hu.crs.hex.simulation.simulation;
+package hu.crs.hex.simulation.foxrabbitsimulation;
 
 import hu.crs.hex.HexEntity;
+import hu.crs.hex.HexProbability;
+import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,20 +1,20 @@
 package hu.crs.hex.simulation;
 
-import hu.crs.hex.simulation.graphics.HexGridPanel;
 import hu.crs.hex.HexEntity;
-import hu.crs.hex.simulation.simulation.FoxRabbitSimulation;
+import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
+import hu.crs.hex.simulation.graphics.HexGridPanel;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 
-import static hu.crs.hex.simulation.simulation.SimulationConfig.COL_COUNT;
-import static hu.crs.hex.simulation.simulation.SimulationConfig.DELAY_MILIS;
-import static hu.crs.hex.simulation.simulation.SimulationConfig.ROW_COUNT;
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.COL_COUNT;
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.DELAY_MILIS;
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.HEX_SIZE;
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.ROW_COUNT;
 
 public class Application extends JFrame {
     private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, HexEntity.EMPTY);
-    private final HexGridPanel hexGridPanel = new HexGridPanel(foxRabbitSimulation.hexBoard());
+    private final HexGridPanel hexGridPanel = new HexGridPanel(ROW_COUNT, COL_COUNT, HEX_SIZE, foxRabbitSimulation.hexBoard());
 
     public Application() {
         setTitle("Hexagon Drawing Example");
@@ -52,7 +52,7 @@ public class Application extends JFrame {
             }
             );
 
-        simulationThread.start();
-});
-        }
-        }
+            simulationThread.start();
+        });
+    }
+}
