@@ -54,7 +54,7 @@ public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
         return maybeEmpty;
     }
 
-    private Optional<HexField<FoxRabbitHexEntity>> handleRabbit(HexField<FoxRabbitHexEntity> hexField) {
+    protected Optional<HexField<FoxRabbitHexEntity>> handleRabbit(HexField<FoxRabbitHexEntity> hexField) {
         if (FoxRabbitHexEntity.RABBIT != hexField.content()) {
             throw new IllegalArgumentException("Not a rabbit!");
         }
@@ -73,7 +73,7 @@ public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
         return maybeGrass;
     }
 
-    private Optional<HexField<FoxRabbitHexEntity>> handleFox(HexField<FoxRabbitHexEntity> hexField) {
+    protected Optional<HexField<FoxRabbitHexEntity>> handleFox(HexField<FoxRabbitHexEntity> hexField) {
         if (FoxRabbitHexEntity.FOX != hexField.content()) {
             throw new IllegalArgumentException("Not a fox!");
         }

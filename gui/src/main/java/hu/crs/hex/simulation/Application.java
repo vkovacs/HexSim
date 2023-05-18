@@ -1,7 +1,7 @@
 package hu.crs.hex.simulation;
 
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitHexEntity;
-import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
+import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitPersistentGrassSimulation;
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig;
 import hu.crs.hex.simulation.graphics.HexGridPanel;
 
@@ -13,7 +13,7 @@ import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfi
 import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.ROW_COUNT;
 
 public class Application extends JFrame {
-    private final Simulation<FoxRabbitHexEntity> simulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, FoxRabbitHexEntity.EMPTY);
+    private final Simulation<FoxRabbitHexEntity> simulation = new FoxRabbitPersistentGrassSimulation(ROW_COUNT, COL_COUNT, FoxRabbitHexEntity.EMPTY);
     private final SimulationConfig simulationConfig = new FoxRabbitSimulationConfig();
     private final HexGridPanel<FoxRabbitHexEntity> hexGridPanel = new HexGridPanel<>(simulationConfig.rowCount(), simulationConfig.colCount(), simulationConfig.hexSize(), simulation.hexBoard());
 
