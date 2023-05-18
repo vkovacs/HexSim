@@ -8,7 +8,7 @@ import hu.crs.hex.HexProbability;
 import java.util.List;
 import java.util.Optional;
 
-public class FoxRabbitSimulation {
+public class FoxRabbitSimulation implements Simulation<HexEntity> {
     private final ComplexHexBoard<HexEntity> hexBoard;
 
     public FoxRabbitSimulation(int rowCount, int colCount, HexEntity defaultHexEntity) {
@@ -26,6 +26,7 @@ public class FoxRabbitSimulation {
         }
     }
 
+    @Override
     public Optional<HexField<HexEntity>> step() {
         var hexField = hexBoard.randomHexField();
         return switch (hexField.content()) {
@@ -89,6 +90,7 @@ public class FoxRabbitSimulation {
         return maybeRabbit;
     }
 
+    @Override
     public ComplexHexBoard<HexEntity> hexBoard() {
         return hexBoard;
     }

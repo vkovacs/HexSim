@@ -2,10 +2,12 @@ package hu.crs.hex.simulation;
 
 import hu.crs.hex.HexEntity;
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
+import hu.crs.hex.simulation.foxrabbitsimulation.Simulation;
 import hu.crs.hex.simulation.graphics.HexGridPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import java.awt.Toolkit;
 
 import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.COL_COUNT;
 import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.DELAY_MILIS;
@@ -13,8 +15,8 @@ import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfi
 import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.ROW_COUNT;
 
 public class Application extends JFrame {
-    private final FoxRabbitSimulation foxRabbitSimulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, HexEntity.EMPTY);
-    private final HexGridPanel hexGridPanel = new HexGridPanel(ROW_COUNT, COL_COUNT, HEX_SIZE, foxRabbitSimulation.hexBoard());
+    private final Simulation<HexEntity> simulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, HexEntity.EMPTY);
+    private final HexGridPanel hexGridPanel = new HexGridPanel(ROW_COUNT, COL_COUNT, HEX_SIZE, simulation.hexBoard());
 
     public Application() {
         setTitle("Hexagon Drawing Example");
@@ -25,7 +27,6 @@ public class Application extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         add(hexGridPanel);
-
     }
 
     public static void main(String[] args) {
@@ -37,20 +38,17 @@ public class Application extends JFrame {
         SwingUtilities.invokeLater(() -> {
             setVisible(true);
             var simulationThread = new Thread(() -> {
-                int i = 0;
                 while (true) {
-                    foxRabbitSimulation.step();
-                    hexGridPanel.hexBoard(foxRabbitSimulation.hexBoard());
+                    simulation.step();
+                    hexGridPanel.hexBoard(simulation.hexBoard());
                     SwingUtilities.invokeLater(hexGridPanel::repaint);
-                    i++;
                     try {
                         Thread.sleep(DELAY_MILIS);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
-            }
-            );
+            });
 
             simulationThread.start();
         });
