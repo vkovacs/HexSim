@@ -30,7 +30,7 @@ fox-rabbit-simulation/src/main/java/hu/crs/hex/simulation/foxrabbitsimulation/Fo
 ```mermaid
 graph TD;
     simulation-api-->hex;
-    fox-rabbit-simulation-->simulation;
+    fox-rabbit-simulation-->simulation-api;
     gui-->fox-rabbit-simulation;
 ```
 
