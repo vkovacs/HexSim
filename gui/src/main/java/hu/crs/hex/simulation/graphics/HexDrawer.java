@@ -1,8 +1,8 @@
 package hu.crs.hex.simulation.graphics;
 
 import hu.crs.hex.Coordinate;
-import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitHexEntity;
 import hu.crs.hex.HexBoard;
+import hu.crs.hex.simulation.HasColor;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class HexDrawer {
     private static final int HEXAGON_SIDES = 6;
 
-    public static void draw(Graphics g, int centerX, int centerY, int size, FoxRabbitHexEntity content) {
+    public static <T extends HasColor> void draw(Graphics g, int centerX, int centerY, int size, T content) {
 
         double halfPixel = 0.5; //remove thin white line between hexes
         double shiftedCenterX = centerX + halfPixel;
@@ -32,25 +32,8 @@ public class HexDrawer {
         var g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(1));
 
-        switch (content) {
-            case EMPTY -> {
-                g2d.setColor(Color.DARK_GRAY);
-                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
-            }
-            case GRASS -> {
-                g2d.setColor(Color.GREEN);
-                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
-            }
-            case RABBIT -> {
-                g2d.setColor(Color.WHITE);
-                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
-            }
-            case FOX -> {
-                g2d.setColor(Color.RED);
-                g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
-            }
-            default -> throw new IllegalArgumentException("Invalid Hex content!");
-        }
+        g2d.setColor(new Color(content.r(), content.g(), content.b()));
+        g2d.fillPolygon(xPoints, yPoints, HEXAGON_SIDES);
     }
 
     public static HexBoard<Coordinate> hexCenters(int rowCount, int colCount, int width, int horizontalSpacing, int verticalSpacing) {
