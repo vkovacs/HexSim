@@ -3,12 +3,10 @@ package hu.crs.hex;
 import java.security.SecureRandom;
 import java.util.List;
 
-public enum HexEntity {
-    EMPTY, FOX, RABBIT, GRASS;
-
+public class RandomHexContentFactory<T> {
     private static final SecureRandom random = new SecureRandom();
 
-    public static HexEntity randomHexEntity(List<HexProbability> hexProbabilities) {
+    public T randomHexEntity(List<HexProbability<T>> hexProbabilities) {
 
         var probabilitySum = hexProbabilities.stream()
                 .map(HexProbability::probability)
@@ -21,17 +19,21 @@ public enum HexEntity {
         return cdfSelector(hexProbabilities, random.nextDouble());
     }
 
-    static HexEntity cdfSelector(List<HexProbability> hexProbabilities, double randomNumber) {
+    T cdfSelector(List<HexProbability<T>> hexProbabilities, double randomNumber) {
         var cumulativeProbability = 0d;
 
-        for (HexProbability hexProbability : hexProbabilities) {
+        for (var hexProbability : hexProbabilities) {
             cumulativeProbability += hexProbability.probability();
 
             if (cumulativeProbability > randomNumber) {
-                return hexProbability.hexEntity();
+                return hexProbability.content();
             }
         }
 
-        return HexEntity.EMPTY;
+        if (cumulativeProbability < randomNumber && randomNumber < 1) {
+            return hexProbabilities.get(hexProbabilities.size() - 1).content();
+        }
+
+        throw new IllegalArgumentException("Illegal generated random number!");
     }
 }

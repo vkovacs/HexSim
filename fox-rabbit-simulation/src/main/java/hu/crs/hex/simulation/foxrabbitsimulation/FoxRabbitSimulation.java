@@ -1,7 +1,7 @@
 package hu.crs.hex.simulation.foxrabbitsimulation;
 
 import hu.crs.hex.ComplexHexBoard;
-import hu.crs.hex.HexEntity;
+import hu.crs.hex.RandomHexContentFactory;
 import hu.crs.hex.HexField;
 import hu.crs.hex.HexProbability;
 import hu.crs.hex.simulation.Simulation;
@@ -9,26 +9,27 @@ import hu.crs.hex.simulation.Simulation;
 import java.util.List;
 import java.util.Optional;
 
-public class FoxRabbitSimulation implements Simulation<HexEntity> {
-    private final ComplexHexBoard<HexEntity> hexBoard;
+public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
+    private final ComplexHexBoard<FoxRabbitHexEntity> hexBoard;
+    private final RandomHexContentFactory<FoxRabbitHexEntity> randomHexContentFactory = new RandomHexContentFactory<>();
 
-    public FoxRabbitSimulation(int rowCount, int colCount, HexEntity defaultHexEntity) {
+    public FoxRabbitSimulation(int rowCount, int colCount, FoxRabbitHexEntity defaultHexEntity) {
         hexBoard = new ComplexHexBoard<>(rowCount, colCount, defaultHexEntity);
-        randomInitialize(List.of(new HexProbability(HexEntity.GRASS, 0.5), new HexProbability(HexEntity.RABBIT, 0.2), new HexProbability(HexEntity.FOX, 0.1)));
+        randomInitialize(List.of(new HexProbability<>(FoxRabbitHexEntity.GRASS, 0.5), new HexProbability<>(FoxRabbitHexEntity.RABBIT, 0.2), new HexProbability<>(FoxRabbitHexEntity.FOX, 0.1)));
     }
 
-    public void randomInitialize(List<HexProbability> hexProbabilities) {
+    public void randomInitialize(List<HexProbability<FoxRabbitHexEntity>> hexProbabilities) {
         for (int i = 0; i < hexBoard.rowCount(); i++) {
             int maxJ = hexBoard.maxColInRow(i);
             for (int j = 0; j < maxJ; j++) {
-                var randomHex = HexEntity.randomHexEntity(hexProbabilities);
+                var randomHex = randomHexContentFactory.randomHexEntity(hexProbabilities);
                 hexBoard.set(i, j, randomHex);
             }
         }
     }
 
     @Override
-    public Optional<HexField<HexEntity>> step() {
+    public Optional<HexField<FoxRabbitHexEntity>> step() {
         var hexField = hexBoard.randomHexField();
         return switch (hexField.content()) {
             case EMPTY -> Optional.empty();
@@ -39,60 +40,60 @@ public class FoxRabbitSimulation implements Simulation<HexEntity> {
         };
     }
 
-    private Optional<HexField<HexEntity>> handleGrass(HexField<HexEntity> hexField) {
-        if (HexEntity.GRASS != hexField.content()) {
+    private Optional<HexField<FoxRabbitHexEntity>> handleGrass(HexField<FoxRabbitHexEntity> hexField) {
+        if (FoxRabbitHexEntity.GRASS != hexField.content()) {
             throw new IllegalArgumentException("Not grass!");
         }
 
         var maybeEmpty = hexBoard.neighbourHexFields(hexField.id()).stream()
-                .filter(neighbourHexField -> HexEntity.EMPTY == neighbourHexField.content())
+                .filter(neighbourHexField -> FoxRabbitHexEntity.EMPTY == neighbourHexField.content())
                 .findAny();
 
-        maybeEmpty.ifPresent(emptyHexField -> hexBoard.set(emptyHexField.id(), HexEntity.GRASS));
+        maybeEmpty.ifPresent(emptyHexField -> hexBoard.set(emptyHexField.id(), FoxRabbitHexEntity.GRASS));
 
         return maybeEmpty;
     }
 
-    private Optional<HexField<HexEntity>> handleRabbit(HexField<HexEntity> hexField) {
-        if (HexEntity.RABBIT != hexField.content()) {
+    private Optional<HexField<FoxRabbitHexEntity>> handleRabbit(HexField<FoxRabbitHexEntity> hexField) {
+        if (FoxRabbitHexEntity.RABBIT != hexField.content()) {
             throw new IllegalArgumentException("Not a rabbit!");
         }
 
         var maybeGrass = hexBoard.neighbourHexFields(hexField.id()).stream()
-                .filter(neighbourHexField -> HexEntity.GRASS == neighbourHexField.content())
+                .filter(neighbourHexField -> FoxRabbitHexEntity.GRASS == neighbourHexField.content())
                 .findAny();
 
         if (maybeGrass.isPresent()) {
             var grassHexField = maybeGrass.get();
-            hexBoard.set(grassHexField.id(), HexEntity.RABBIT);
+            hexBoard.set(grassHexField.id(), FoxRabbitHexEntity.RABBIT);
         } else {
-            hexBoard.set(hexField.id(), HexEntity.EMPTY);
+            hexBoard.set(hexField.id(), FoxRabbitHexEntity.EMPTY);
         }
 
         return maybeGrass;
     }
 
-    private Optional<HexField<HexEntity>> handleFox(HexField<HexEntity> hexField) {
-        if (HexEntity.FOX != hexField.content()) {
+    private Optional<HexField<FoxRabbitHexEntity>> handleFox(HexField<FoxRabbitHexEntity> hexField) {
+        if (FoxRabbitHexEntity.FOX != hexField.content()) {
             throw new IllegalArgumentException("Not a fox!");
         }
 
         var maybeRabbit = hexBoard.neighbourHexFields(hexField.id()).stream()
-                .filter(neighbourHexField -> HexEntity.RABBIT == neighbourHexField.content())
+                .filter(neighbourHexField -> FoxRabbitHexEntity.RABBIT == neighbourHexField.content())
                 .findAny();
 
         if (maybeRabbit.isPresent()) {
             var rabbitHexField = maybeRabbit.get();
-            hexBoard.set(rabbitHexField.id(), HexEntity.FOX);
+            hexBoard.set(rabbitHexField.id(), FoxRabbitHexEntity.FOX);
         } else {
-            hexBoard.set(hexField.id(), HexEntity.EMPTY);
+            hexBoard.set(hexField.id(), FoxRabbitHexEntity.EMPTY);
         }
 
         return maybeRabbit;
     }
 
     @Override
-    public ComplexHexBoard<HexEntity> hexBoard() {
+    public ComplexHexBoard<FoxRabbitHexEntity> hexBoard() {
         return hexBoard;
     }
 }

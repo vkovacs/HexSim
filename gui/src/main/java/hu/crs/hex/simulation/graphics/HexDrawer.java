@@ -1,7 +1,7 @@
 package hu.crs.hex.simulation.graphics;
 
 import hu.crs.hex.Coordinate;
-import hu.crs.hex.HexEntity;
+import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitHexEntity;
 import hu.crs.hex.HexBoard;
 
 import java.awt.BasicStroke;
@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 public class HexDrawer {
     private static final int HEXAGON_SIDES = 6;
 
-    public static void draw(Graphics g, int centerX, int centerY, int size, HexEntity content) {
+    public static void draw(Graphics g, int centerX, int centerY, int size, FoxRabbitHexEntity content) {
 
         double halfPixel = 0.5; //remove thin white line between hexes
         double shiftedCenterX = centerX + halfPixel;

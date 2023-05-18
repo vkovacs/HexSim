@@ -1,7 +1,5 @@
 package hu.crs.hex;
 
-import hu.crs.hex.HexEntity;
-
-public record HexProbability(HexEntity hexEntity, double probability) {
+public record HexProbability<T>(T content, double probability) {
 
 }
