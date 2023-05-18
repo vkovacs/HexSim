@@ -3,6 +3,7 @@
 * Java 17
 * JAVA_HOME environment variable is set up to point to the path of the JAVA 17 jre.
 
+# Start application
 In the main folder of the application (HexSim) use
 ## Linux
 ~~~
