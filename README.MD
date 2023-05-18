@@ -20,5 +20,13 @@ gradlew run
 fox-rabbit-simulation/src/main/java/hu/crs/hex/simulation/foxrabbitsimulation/FoxRabbitSimulationConfig.java
 ~~~
 
+# Module Dependencies
+```mermaid
+graph TD;
+    simulation-->hex;
+    fox-rabbit-simulation-->simulation;
+    gui-->fox-rabbit-simulation;
+```
+
 # Resources
 https://www.redblobgames.com/grids/hexagons/
