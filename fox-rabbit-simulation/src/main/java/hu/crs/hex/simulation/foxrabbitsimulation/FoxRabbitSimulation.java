@@ -21,7 +21,7 @@ public class FoxRabbitSimulation implements Simulation<HexEntity> {
         for (int i = 0; i < hexBoard.rowCount(); i++) {
             int maxJ = hexBoard.maxColInRow(i);
             for (int j = 0; j < maxJ; j++) {
-                var randomHex = randomHexContent(hexProbabilities);
+                var randomHex = HexEntity.randomHexEntity(hexProbabilities);
                 hexBoard.set(i, j, randomHex);
             }
         }
@@ -94,31 +94,5 @@ public class FoxRabbitSimulation implements Simulation<HexEntity> {
     @Override
     public ComplexHexBoard<HexEntity> hexBoard() {
         return hexBoard;
-    }
-
-    HexEntity randomHexContent(List<HexProbability> hexProbabilities) {
-        var probabilitySum = hexProbabilities.stream()
-                .map(HexProbability::probability)
-                .mapToDouble(Double::doubleValue)
-                .sum();
-
-        if (probabilitySum > 1) {
-            throw new IllegalArgumentException("Probability sum must not be greater than 1");
-        }
-        return cdfSelector(hexProbabilities, Math.random());
-    }
-
-    HexEntity cdfSelector(List<HexProbability> hexProbabilities, double randomNumber) {
-        var cumulativeProbability = 0d;
-
-        for (HexProbability hexProbability : hexProbabilities) {
-            cumulativeProbability += hexProbability.probability();
-
-            if (cumulativeProbability > randomNumber) {
-                return hexProbability.hexEntity();
-            }
-        }
-
-        return HexEntity.EMPTY;
     }
 }
