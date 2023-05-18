@@ -1,21 +1,15 @@
 package hu.crs.hex.simulation;
 
-import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitHexEntity;
 import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulation;
-import hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig;
 import hu.crs.hex.simulation.graphics.HexGridPanel;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Toolkit;
 
-import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.COL_COUNT;
-import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.ROW_COUNT;
-
 public class Application extends JFrame {
-    private final Simulation<FoxRabbitHexEntity> simulation = new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, FoxRabbitHexEntity.EMPTY);
-    private final SimulationConfig simulationConfig = new FoxRabbitSimulationConfig();
-    private final HexGridPanel hexGridPanel = new HexGridPanel(simulationConfig.rowCount(), simulationConfig.colCount(), simulationConfig.hexSize(), simulation.hexBoard());
+    private final Simulation simulation = FoxRabbitSimulation.instance();
+    private final HexGridPanel hexGridPanel = new HexGridPanel(simulation.simulationConfig().rowCount(), simulation.simulationConfig().colCount(), simulation.simulationConfig().hexSize(), simulation.hexBoard());
 
     public Application() {
         setTitle("Hexagon Drawing Example");

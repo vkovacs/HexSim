@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface Simulation<T> {
     ComplexHexBoard<T> hexBoard();
     Optional<HexField<T>> step();
+    SimulationConfig simulationConfig();
 }

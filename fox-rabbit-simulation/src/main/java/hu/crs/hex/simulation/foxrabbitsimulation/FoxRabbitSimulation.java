@@ -1,28 +1,37 @@
 package hu.crs.hex.simulation.foxrabbitsimulation;
 
 import hu.crs.hex.ComplexHexBoard;
-import hu.crs.hex.RandomHexContentFactory;
+import hu.crs.hex.HexContentFactory;
 import hu.crs.hex.HexField;
 import hu.crs.hex.HexProbability;
 import hu.crs.hex.simulation.Simulation;
+import hu.crs.hex.simulation.SimulationConfig;
 
 import java.util.List;
 import java.util.Optional;
 
-public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
-    private final ComplexHexBoard<FoxRabbitHexEntity> hexBoard;
-    private final RandomHexContentFactory<FoxRabbitHexEntity> randomHexContentFactory = new RandomHexContentFactory<>();
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.COL_COUNT;
+import static hu.crs.hex.simulation.foxrabbitsimulation.FoxRabbitSimulationConfig.ROW_COUNT;
 
-    public FoxRabbitSimulation(int rowCount, int colCount, FoxRabbitHexEntity defaultHexEntity) {
+public class FoxRabbitSimulation<FoxRabbitHexEntity> implements Simulation<FoxRabbitHexEntity> {
+    private final ComplexHexBoard<FoxRabbitHexEntity> hexBoard;
+    private final SimulationConfig simulationConfig = FoxRabbitSimulationConfig.instance();
+    private final HexContentFactory<FoxRabbitHexEntity> hexContentFactory = new HexContentFactory<>();
+
+    private FoxRabbitSimulation(int rowCount, int colCount, FoxRabbitHexEntity defaultHexEntity) {
         hexBoard = new ComplexHexBoard<>(rowCount, colCount, defaultHexEntity);
         randomInitialize(List.of(new HexProbability<>(FoxRabbitHexEntity.GRASS, 0.5), new HexProbability<>(FoxRabbitHexEntity.RABBIT, 0.2), new HexProbability<>(FoxRabbitHexEntity.FOX, 0.1)));
+    }
+
+    public static FoxRabbitSimulation instance() {
+        return new FoxRabbitSimulation(ROW_COUNT, COL_COUNT, FoxRabbitHexEntity.EMPTY);
     }
 
     public void randomInitialize(List<HexProbability<FoxRabbitHexEntity>> hexProbabilities) {
         for (int i = 0; i < hexBoard.rowCount(); i++) {
             int maxJ = hexBoard.maxColInRow(i);
             for (int j = 0; j < maxJ; j++) {
-                var randomHex = randomHexContentFactory.randomHexEntity(hexProbabilities);
+                var randomHex = hexContentFactory.randomHexEntity(hexProbabilities);
                 hexBoard.set(i, j, randomHex);
             }
         }
@@ -95,5 +104,10 @@ public class FoxRabbitSimulation implements Simulation<FoxRabbitHexEntity> {
     @Override
     public ComplexHexBoard<FoxRabbitHexEntity> hexBoard() {
         return hexBoard;
+    }
+
+    @Override
+    public SimulationConfig simulationConfig() {
+        return simulationConfig;
     }
 }

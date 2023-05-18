@@ -3,7 +3,7 @@ package hu.crs.hex;
 import java.security.SecureRandom;
 import java.util.List;
 
-public class RandomHexContentFactory<T> {
+public class HexContentFactory<T> {
     private static final SecureRandom random = new SecureRandom();
 
     public T randomHexEntity(List<HexProbability<T>> hexProbabilities) {

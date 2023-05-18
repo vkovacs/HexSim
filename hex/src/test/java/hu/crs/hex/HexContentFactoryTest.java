@@ -9,8 +9,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class RandomHexContentFactoryTest {
-    private final RandomHexContentFactory<TestHex> underTest = new RandomHexContentFactory<>();
+class HexContentFactoryTest {
+    private final HexContentFactory<TestHex> underTest = new HexContentFactory<>();
 
     @Test
     public void shouldThrowExceptionIfProbabilitySumIsLargerThan1() {
